@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="SignUp">
+  <grid id="27dc6" binding="panelSignUp" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="218" height="173"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <grid id="5fd8a" binding="panelGetData" layout-manager="FlowLayout" hgap="0" vgap="5" flow-align="1">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="a1e58" binding="panelLabels" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="8">
+            <margin top="10" left="0" bottom="0" right="0"/>
+            <constraints/>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="ba3b9" class="javax.swing.JLabel" binding="labelLoginSignUp">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Times New Roman" size="14" style="0"/>
+                  <horizontalAlignment value="2"/>
+                  <text value="Логин"/>
+                </properties>
+              </component>
+              <component id="1e642" class="javax.swing.JLabel" binding="labelPassSignUp">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Times New Roman" size="14" style="0"/>
+                  <horizontalAlignment value="2"/>
+                  <text value="Пароль"/>
+                </properties>
+              </component>
+              <component id="690bc" class="javax.swing.JLabel" binding="labelNameSignUp">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Times New Roman" size="14" style="0"/>
+                  <horizontalAlignment value="2"/>
+                  <text value="Имя"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="6b772" binding="panelText" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="10" left="0" bottom="0" right="0"/>
+            <constraints/>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="d2ac3" class="javax.swing.JTextField" binding="loginTextFieldSignUp">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <columns value="10"/>
+                  <font name="Times New Roman" size="14" style="0"/>
+                </properties>
+              </component>
+              <component id="627a" class="javax.swing.JTextField" binding="passTextFieldSignUp">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <columns value="10"/>
+                  <font name="Times New Roman" size="14" style="0"/>
+                </properties>
+              </component>
+              <component id="ded0f" class="javax.swing.JTextField" binding="nameTextFieldSignUp">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <columns value="10"/>
+                  <font name="Times New Roman" size="14" style="0"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+        </children>
+      </grid>
+      <grid id="5128" binding="panelButtonSignUp" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="7347f" class="javax.swing.JButton" binding="buttonSignUp">
+            <constraints/>
+            <properties>
+              <font name="Times New Roman" size="14" style="0"/>
+              <foreground color="-16773445"/>
+              <horizontalTextPosition value="0"/>
+              <text value="Зарегистрироваться"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>
