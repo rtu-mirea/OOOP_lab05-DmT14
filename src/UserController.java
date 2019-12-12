@@ -6,7 +6,7 @@ import java.util.Set;
 public class UserController {
     public static ArrayList<User> list;
     private Set<User> onlineSet;
-    private static final String pathName = "users.txt";
+    public static final String pathName = "users.txt";
 
     public UserController() {
         onlineSet = new HashSet<>();
@@ -54,11 +54,11 @@ public class UserController {
         return result;
     }
 
-    public static String getPath() {
-        return pathName;
-    }
-
-    public static ArrayList getUsersList() {
-        return list;
+    public static void inFile() {
+        try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(pathName))) {
+            out.writeObject(list);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

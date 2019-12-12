@@ -29,6 +29,11 @@ public class User implements Serializable {
         return password;
     }
 
+    public User setData(String pNew) {
+        this.password = pNew;
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

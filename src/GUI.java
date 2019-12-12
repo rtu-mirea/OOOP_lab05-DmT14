@@ -8,6 +8,9 @@ public class GUI extends JFrame {
     public static Auth auth = new Auth();
     public static SignUp signUp = new SignUp();
     public static JFrame tableData = new JFrame("Данные игроков");
+    public static Change change = new Change();
+    public static Delete deleteWindow = new Delete();
+
     public static JTable usersData = new JTable();
 
     // шрифт
@@ -36,6 +39,9 @@ public class GUI extends JFrame {
     public static JButton buttonSignUp = new JButton("Регистрация");
     public static JButton buttonMake = new JButton("Сделать ход");
     public static JButton buttonOpenTable = new JButton("Данные игроков");
+
+    public static JButton buttonChange = new JButton("Изменить");
+    public static JButton buttonDelete = new JButton("Удалить");
 
 
 
@@ -263,6 +269,131 @@ public class GUI extends JFrame {
         });
 
 
+
+
+
+        tableData.add(buttonDelete);
+        buttonDelete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                deleteWindow.setSize(250, 150);
+                deleteWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                deleteWindow.setLocationRelativeTo(null);
+                deleteWindow.setLayout(new FlowLayout());
+                deleteWindow.setTitle("Удаление");
+                deleteWindow.setResizable(false);
+
+                deleteWindow.add(deleteWindow.panelDelete);
+                deleteWindow.add(deleteWindow.panelGetDataDelete);
+                deleteWindow.add(deleteWindow.panelLabelsDelete);
+                deleteWindow.add(deleteWindow.panelTextDelete);
+                deleteWindow.add(deleteWindow.panelButtonDelete);
+
+                deleteWindow.setVisible(true);
+            }
+        });
+
+        deleteWindow.buttonDeleteData.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                UserController userController = new UserController();
+                User user = null;
+                int tmp = 0;
+                outer: while (true) {
+                    user = null;
+                    System.out.println("1");
+                    if (deleteWindow.loginTextFieldDelete.getText() == "" || deleteWindow.passTextFieldDelete.getText() == "") return;
+                    User tmpUser = new User(deleteWindow.loginTextFieldDelete.getText(), deleteWindow.passTextFieldDelete.getText());
+                    user = userController.userExists(tmpUser);
+                    if (user == null) return;
+                    System.out.println("2");
+                    for (int i = 0; i < UserController.list.size(); i++) {
+                        String n = UserController.list.get(i).getLogin();
+                        String m = UserController.list.get(i).getPassword();
+                        if (n.equals(deleteWindow.loginTextFieldDelete.getText()) && m.equals(deleteWindow.passTextFieldDelete.getText())) {
+                            System.out.println("3");
+                            UserController.list.remove(i);
+                            tmp = 1;
+                            break outer;
+                        }
+                    }
+                    if(tmp != 1) { return; }
+                }
+
+                UserController.inFile();
+                BattleShip.message = "Пользователь " + user.getName() + " удалён";
+                BattleShip.print(BattleShip.message);
+
+                deleteWindow.loginTextFieldDelete.setText("");
+                deleteWindow.passTextFieldDelete.setText("");
+
+                deleteWindow.setVisible(false);
+                tableData.setVisible(false);
+            }
+        });
+
+        tableData.add(buttonChange);
+        buttonChange.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                change.setSize(250, 180);
+                change.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                change.setLocationRelativeTo(null);
+                change.setLayout(new FlowLayout());
+                change.setTitle("Изменение");
+                change.setResizable(false);
+
+                change.add(change.panelChange);
+                change.add(change.panelGetDataChange);
+                change.add(change.panelLabelsChange);
+                change.add(change.panelTextChange);
+                change.add(change.panelButtonChange);
+
+
+                change.setVisible(true);
+            }
+        });
+
+        change.buttonChangeData.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                User user = null;
+                int tmp = 0;
+                outer: while (true) {
+                    UserController userController = new UserController();
+                    user = null;
+                    if (change.loginTextFieldChange.getText() == "" || change.oldPassTextFieldChange.getText() == "" || change.newPassTextFieldChange.getText() == "") return;
+                    User tmpUser = new User(change.loginTextFieldChange.getText(), change.oldPassTextFieldChange.getText());
+                    user = userController.userExists(tmpUser);
+                    if (user == null) return;
+                    for (int i = 0; i < UserController.list.size(); i++) {
+                        String n = UserController.list.get(i).getLogin();
+                        String m = UserController.list.get(i).getPassword();
+                        if (n.equals(change.loginTextFieldChange.getText()) && m.equals(change.oldPassTextFieldChange.getText())) {
+                            UserController.list.get(i).setData(change.newPassTextFieldChange.getText());
+                            tmp = 1;
+                            break outer;
+                        }
+                    }
+                    if(tmp != 1) { return; }
+                }
+
+                UserController.inFile();
+                BattleShip.message = "Данные пользователя " + user.getName() + " изменены";
+                BattleShip.print(BattleShip.message);
+
+                change.loginTextFieldChange.setText("");
+                change.oldPassTextFieldChange.setText("");
+                change.newPassTextFieldChange.setText("");
+
+                change.setVisible(false);
+                tableData.setVisible(false);
+            }
+        });
+
+
+
+
         playing.setVisible(true);
     }
 
@@ -271,14 +402,18 @@ public class GUI extends JFrame {
         Object[] headers = {"Логин", "Пароль", "Имя"};
         int size = UserController.list.size();
         Object[][] data = new Object[size][3];
+
         for(int i = 0; i < size; i++) {
             data[i][0] = UserController.list.get(i).getLogin();
             data[i][1] = UserController.list.get(i).getPassword();
             data[i][2] = UserController.list.get(i).getName();
         }
+        tableData = new JFrame("Данные игроков");
         usersData = new JTable(data, headers);
+        tableData.add(buttonDelete);
+        tableData.add(buttonChange);
 
-        tableData.setSize(300, 170);
+        tableData.setSize(300, 200);
         tableData.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         tableData.setLocationRelativeTo(null);
         tableData.setLayout(new FlowLayout());
