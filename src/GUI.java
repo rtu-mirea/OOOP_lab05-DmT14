@@ -305,7 +305,30 @@ public class GUI extends JFrame {
                     if (deleteWindow.loginTextFieldDelete.getText() == "" || deleteWindow.passTextFieldDelete.getText() == "") return;
                     User tmpUser = new User(deleteWindow.loginTextFieldDelete.getText(), deleteWindow.passTextFieldDelete.getText());
                     user = userController.userExists(tmpUser);
-                    if (user == null) return;
+                    if (user == null) {
+                        JDialog errorMessageWindow = new JDialog();
+                        errorMessageWindow.setTitle("Ошибка");
+                        errorMessageWindow.setSize(250, 100);
+                        errorMessageWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        errorMessageWindow.setLocationRelativeTo(null);
+                        errorMessageWindow.setLayout(new FlowLayout());
+                        errorMessageWindow.setTitle("Ошибка");
+                        errorMessageWindow.setResizable(false);
+                        JLabel label = new JLabel("Неправильно введен логин/пароль");
+                        label.setFont(font);
+                        JButton buttonExit = new JButton("ОК");
+                        buttonExit.setFont(font);
+                        buttonExit.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent actionEvent) {
+                                errorMessageWindow.setVisible(false);
+                            }
+                        });
+                        errorMessageWindow.add(label);
+                        errorMessageWindow.add(buttonExit);
+                        errorMessageWindow.setVisible(true);
+                        return;
+                    }
                     System.out.println("2");
                     for (int i = 0; i < UserController.list.size(); i++) {
                         String n = UserController.list.get(i).getLogin();
@@ -365,7 +388,30 @@ public class GUI extends JFrame {
                     if (change.loginTextFieldChange.getText() == "" || change.oldPassTextFieldChange.getText() == "" || change.newPassTextFieldChange.getText() == "") return;
                     User tmpUser = new User(change.loginTextFieldChange.getText(), change.oldPassTextFieldChange.getText());
                     user = userController.userExists(tmpUser);
-                    if (user == null) return;
+                    if (user == null) {
+                        JDialog errorMessageWindow = new JDialog();
+                        errorMessageWindow.setTitle("Ошибка");
+                        errorMessageWindow.setSize(250, 100);
+                        errorMessageWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        errorMessageWindow.setLocationRelativeTo(null);
+                        errorMessageWindow.setLayout(new FlowLayout());
+                        errorMessageWindow.setTitle("Ошибка");
+                        errorMessageWindow.setResizable(false);
+                        JLabel label = new JLabel("Неправильно введен логин/пароль");
+                        label.setFont(font);
+                        JButton buttonExit = new JButton("ОК");
+                        buttonExit.setFont(font);
+                        buttonExit.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent actionEvent) {
+                                errorMessageWindow.setVisible(false);
+                            }
+                        });
+                        errorMessageWindow.add(label);
+                        errorMessageWindow.add(buttonExit);
+                        errorMessageWindow.setVisible(true);
+                        return;
+                    }
                     for (int i = 0; i < UserController.list.size(); i++) {
                         String n = UserController.list.get(i).getLogin();
                         String m = UserController.list.get(i).getPassword();

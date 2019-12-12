@@ -25,6 +25,9 @@ public class BattleShip {
              User user = null;
              User user2 = null;
              GUI.createGUI();
+             //chooseFileToOut();
+             // ЗАТЕМ ДОБАВИТЬ КНОПКУ "ВЫХОД" И СДЕЛАТЬ В НЕЙ ВЫБОР ФАЙЛА ДЛЯ ЗАПИСИ В НЕГО КОЛЛЕКЦИИ ПОЛЬЗОВАТЕЛЕЙ
+             // И ЗАВЕРШИТЬ ВЫПОЛНЕНИЕ ПРОГРАММЫ
              outer: while (true) { // Пока запущена программа
 
                  print(message);
