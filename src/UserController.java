@@ -6,7 +6,7 @@ import java.util.Set;
 public class UserController {
     public static ArrayList<User> list;
     private Set<User> onlineSet;
-    public static final String pathName = "users.txt";
+    public static String pathName = "users.txt";
 
     public UserController() {
         onlineSet = new HashSet<>();
@@ -60,5 +60,9 @@ public class UserController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void setPath(String path) {
+        pathName = path;
     }
 }

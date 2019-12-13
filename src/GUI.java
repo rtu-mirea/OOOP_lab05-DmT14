@@ -1,6 +1,11 @@
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 public class GUI extends JFrame {
     // окна приложения
@@ -12,6 +17,8 @@ public class GUI extends JFrame {
     public static Delete deleteWindow = new Delete();
 
     public static JTable usersData = new JTable();
+
+    private final String[] FILTERS = {"txt", "*.txt"};
 
     // шрифт
     private static Font font = new Font("Times New Roman", Font.PLAIN, 14);
@@ -39,6 +46,7 @@ public class GUI extends JFrame {
     public static JButton buttonSignUp = new JButton("Регистрация");
     public static JButton buttonMake = new JButton("Сделать ход");
     public static JButton buttonOpenTable = new JButton("Данные игроков");
+    public static JButton buttonExit = new JButton("Сохранить и выйти");
 
     public static JButton buttonChange = new JButton("Изменить");
     public static JButton buttonDelete = new JButton("Удалить");
@@ -268,6 +276,48 @@ public class GUI extends JFrame {
             }
         });
 
+        // кнопка главного окна "выйти из игры"
+        panelButtons.add(buttonExit);
+        buttonExit.setPreferredSize(new Dimension(150,30));
+        buttonExit.setFont(font);
+        buttonExit.setForeground(Color.blue);
+        buttonExit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                UIManager.put("FileChooser.saveButtonText", "Сохранить");
+                UIManager.put("FileChooser.cancelButtonText", "Отмена");
+                UIManager.put("FileChooser.fileNameLabelText", "Наименование файла");
+                UIManager.put("FileChooser.filesOfTypeLabelText", "Типы файлов");
+                UIManager.put("FileChooser.lookInLabelText", "Директория");
+                UIManager.put("FileChooser.saveInLabelText", "Сохранить в директории");
+                UIManager.put("FileChooser.folderNameLabelText", "Путь директории");
+                JFrame chooser = new JFrame("Сохранение файла");
+                JFileChooser fileChooser = new JFileChooser("C:\\Users\\user\\Desktop\\3 СЕМЕСТР\\ООП\\ЛАБ\\ЛР5_ООП_Терентьев_ИКБО-17-18 (проект внутри)\\lr5");
+                chooser.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                fileChooser.setDialogTitle("Сохранение файла");
+
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
+                fileChooser.setFileFilter(filter);
+
+                fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                int result = fileChooser.showSaveDialog(chooser);
+
+                UserController.setPath(fileChooser.getSelectedFile().getPath());
+
+                try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(UserController.pathName))) {
+                    out.writeObject(UserController.list);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+                if (result == JFileChooser.APPROVE_OPTION )
+                    JOptionPane.showMessageDialog(chooser,"Файл '" + fileChooser.getSelectedFile().getName() +"' сохранен");
+
+                System.exit(1);
+            }
+        });
+
 
 
 
@@ -301,7 +351,6 @@ public class GUI extends JFrame {
                 int tmp = 0;
                 outer: while (true) {
                     user = null;
-                    System.out.println("1");
                     if (deleteWindow.loginTextFieldDelete.getText() == "" || deleteWindow.passTextFieldDelete.getText() == "") return;
                     User tmpUser = new User(deleteWindow.loginTextFieldDelete.getText(), deleteWindow.passTextFieldDelete.getText());
                     user = userController.userExists(tmpUser);
@@ -329,12 +378,10 @@ public class GUI extends JFrame {
                         errorMessageWindow.setVisible(true);
                         return;
                     }
-                    System.out.println("2");
                     for (int i = 0; i < UserController.list.size(); i++) {
                         String n = UserController.list.get(i).getLogin();
                         String m = UserController.list.get(i).getPassword();
                         if (n.equals(deleteWindow.loginTextFieldDelete.getText()) && m.equals(deleteWindow.passTextFieldDelete.getText())) {
-                            System.out.println("3");
                             UserController.list.remove(i);
                             tmp = 1;
                             break outer;
@@ -442,6 +489,7 @@ public class GUI extends JFrame {
 
         playing.setVisible(true);
     }
+
 
     public static void createTable() {
 

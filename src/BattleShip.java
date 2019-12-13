@@ -1,4 +1,6 @@
-import java.io.IOException;
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,9 +27,7 @@ public class BattleShip {
              User user = null;
              User user2 = null;
              GUI.createGUI();
-             //chooseFileToOut();
-             // ЗАТЕМ ДОБАВИТЬ КНОПКУ "ВЫХОД" И СДЕЛАТЬ В НЕЙ ВЫБОР ФАЙЛА ДЛЯ ЗАПИСИ В НЕГО КОЛЛЕКЦИИ ПОЛЬЗОВАТЕЛЕЙ
-             // И ЗАВЕРШИТЬ ВЫПОЛНЕНИЕ ПРОГРАММЫ
+             openFile();
              outer: while (true) { // Пока запущена программа
 
                  print(message);
@@ -208,5 +208,36 @@ public class BattleShip {
                 locgames.add(game);
 
         return locgames;
+    }
+
+    public static void openFile() {
+        UIManager.put("FileChooser.openButtonText", "Открыть");
+        UIManager.put("FileChooser.cancelButtonText", "Отмена");
+        UIManager.put("FileChooser.fileNameLabelText", "Наименование файла");
+        UIManager.put("FileChooser.filesOfTypeLabelText", "Типы файлов");
+        UIManager.put("FileChooser.lookInLabelText", "Директория");
+        UIManager.put( "FileChooser.saveInLabelText", "Сохранить в директории");
+        UIManager.put("FileChooser.folderNameLabelText", "Путь директории");
+        JFrame chooser = new JFrame("Выбор файла для чтения данных");
+        JFileChooser fileChooser = new JFileChooser("C:\\Users\\user\\Desktop\\3 СЕМЕСТР\\ООП\\ЛАБ\\ЛР5_ООП_Терентьев_ИКБО-17-18 (проект внутри)\\lr5");
+        chooser.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        fileChooser.setDialogTitle("Выбор файла");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
+        fileChooser.setFileFilter(filter);
+
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        int result = fileChooser.showOpenDialog(chooser);
+        if (result == JFileChooser.APPROVE_OPTION)
+            JOptionPane.showMessageDialog(chooser, "Файл '" + fileChooser.getSelectedFile().getName() +"' выбран для чтения");
+        if(fileChooser.getSelectedFile() == null)
+            System.exit(1);
+
+        UserController.setPath(fileChooser.getSelectedFile().getPath());
+
+        try(ObjectInputStream in = new ObjectInputStream(new FileInputStream(UserController.pathName))) {
+            UserController.list = (ArrayList<User>) in.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }
