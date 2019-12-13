@@ -34,12 +34,14 @@ public class BattleShip {
 
                  if (GUI.newGame == true) {
                      userController = new UserController();
+                     openFile();
                      authUser = null;
                      currentUser = null;
                      mainGame = null;
                      user = null;
                      user2 = null;
                      gid = 0;
+                     GUI.newGame = false;
                  }
 
                  if (choise == 2) { // Если выбрана регистрация

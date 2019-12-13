@@ -18,8 +18,6 @@ public class GUI extends JFrame {
 
     public static JTable usersData = new JTable();
 
-    private final String[] FILTERS = {"txt", "*.txt"};
-
     // шрифт
     private static Font font = new Font("Times New Roman", Font.PLAIN, 14);
 
