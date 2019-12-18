@@ -454,6 +454,7 @@ public class GUI extends JFrame {
                         label.setFont(font);
                         JButton buttonExit = new JButton("ОК");
                         buttonExit.setFont(font);
+                        buttonExit.setForeground(Color.blue);
                         buttonExit.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent actionEvent) {
