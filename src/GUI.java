@@ -321,6 +321,8 @@ public class GUI extends JFrame {
 
 
         tableData.add(buttonDelete);
+        buttonDelete.setFont(font);
+        buttonDelete.setForeground(Color.blue);
         buttonDelete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -341,6 +343,8 @@ public class GUI extends JFrame {
             }
         });
 
+        deleteWindow.buttonDeleteData.setFont(font);
+        deleteWindow.buttonDeleteData.setForeground(Color.blue);
         deleteWindow.buttonDeleteData.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -401,6 +405,8 @@ public class GUI extends JFrame {
         });
 
         tableData.add(buttonChange);
+        buttonChange.setFont(font);
+        buttonChange.setForeground(Color.blue);
         buttonChange.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -422,6 +428,8 @@ public class GUI extends JFrame {
             }
         });
 
+        change.buttonChangeData.setFont(font);
+        change.buttonChangeData.setForeground(Color.blue);
         change.buttonChangeData.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
